@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+
+th {
+  font-size: 1.25em;
+}
+
+
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+th {
+  text-align: center;
+}
+
+
+td {
+  text-align: center;
+  font-size: 1.25em;
+}
+
+th, td {
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>{{mysystems.chem_formula }}</h1>
+
+<ul>
+<h2> System Data </h2>
+<table class="left">
+<tr>
+  <th>System Name  </th>
+  <th>Space Group </th>
+  <th>Space Group No </th>
+</tr>
+
+<tr>
+  <td> {{ mysystems.sys_name}} </td>
+  <td> {{ mysystems.space_grp }}</td>
+  <td> {{ mysystems.space_grp_no}}</td>
+</tr>
+</table>
+  
+<h2> General Magnetic Data </h2>
+  {% for x in mymaggeninfo %}
+
+<table class="left">
+<tr>
+  <th> Magnetic Config.  </th>
+  <th> Magnetic Atom </th>
+  <th> Sites </th>
+  <th> Site Position (Frac. coord) </th>
+  <th> Site Moment {{x.moment_unit}} </th>
+  <th> Total Moment Cell {{x.moment_unit}} </th>
+</tr>
+
+<tr>
+  <td> {{x.mag_gs}}</td>
+
+  {% for i in x.mag_mom_site.values %}
+
+  <td> {{i.atoms}} </td>  
+  <td>{{i.nsite}} </td>
+  <td> {% for j in i.pos %} {{j}} <br></br> {% endfor %} </td>
+  <td>{% for j in i.moment %} {{j}} <br></br> {% endfor %} </td>
+
+  {% endfor %}
+
+  <td> {{x.mag_mom_cell}} </td>
+ </tr>
+ </table>
+
+  {% endfor %}
+
+
+  <h2> Exchange Interactions Bond Types</h2>
+ 
+<table> 
+<tr>
+  <td> Bond Type {{x.bond_type}}</td>
+  <td> Exchange Interactions </td>
+</tr>
+
+  {% for x in mymagbonddata %}
+<tr>
+  <td> {{x.bond_type}}</td>
+  <td> <a href="exchange/{{ x.id }}"> Exchange Details </a> </td>
+</tr>
+  {% endfor %}
+</table>
+
+</ul>
+
+
+<p style="font-size:25px">Back to <a href="/systems">Systems</a></p>  
+
+
+</body>
+</html>

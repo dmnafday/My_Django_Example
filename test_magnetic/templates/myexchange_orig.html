@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>{{myexchangedata.magbonddata.system.chem_formula }}</h1>
+
+<ul>
+  
+  <p> Bond Type : {{myexchangedata.magbonddata.bond_type}}</p>
+  <p> Bond Shell : {{myexchangedata.magbonddata.bond_shell}}</p>
+  <p> Bond Pair : {{myexchangedata.magbonddata.bond_pair}}</p>
+  <p> Bond Distance : {{myexchangedata.magbonddata.bond_dist}}</p>
+  <p> Bond Vector : 
+  {% for i in myexchangedata.magbonddata.bond_vec.values %}
+  {{i}}</p>
+  {% endfor %}
+ 
+  
+  <p> Magnetic Exchange Tensor {{myexchangedata.exchange_unit}} </p>
+  {% for i in myexchangedata.exchange_tensor.values %}
+  {% for j in i %}
+   <p> {{j}} <br></br> </p>
+  {% endfor %}
+  {% endfor %}
+  
+
+  {% for i in myexchangedata.Jiso.values %}
+  <p> Isotropic Exchange J_iso = {{i}} {{myexchangedata.exchange_unit}} </p>
+  {% endfor %}
+
+  {% for i in myexchangedata.DMI.values %}
+  <p> Dzyaloshinskii–Moriya interaction DMI = {{i}} {{myexchangedata.exchange_unit}}</p>
+  {% endfor %}
+
+  <p> Single Ion Anisotropy (SIA) {{myexchangedata.exchange_unit}} </p>
+  {% for i in myexchangedata.SIA.values %}
+  {% for j in i %}
+   <p> {{j}} <br></br> </p>
+  {% endfor %}
+  {% endfor %}
+
+
+
+
+</ul>
+
+
+<p>Back to <a href="/systems/magnetic/{{myexchangedata.magbonddata.system.id}}">Magnetic Details</a></p>  
+
+
+</body>
+</html>

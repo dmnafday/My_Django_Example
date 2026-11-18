@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>{{mysystems.chem_formula }}</h1>
+
+<ul>
+  <p>System Name : {{ mysystems.sys_name}}</p>
+  <p>Space Group : {{ mysystems.space_grp }}</p>
+  <p>Space Group No : {{ mysystems.space_grp_no}}</p>
+
+  {% for x in mymaggeninfo %}
+  
+  <p> Magnetic Ground State : {{x.mag_gs}}</p>
+  <p> Magnetic Atom Type : {{x.mag_atoms.values}}</p>
+ 
+  {% for i in x.mag_mom_site.values %}
+   <p> {{i.atoms}} {{i.moment}} <br></br> Site : {{i.nsite}} at {{i.pos}} </p>
+  {% endfor %}
+
+  <p> Total Moment in Cell :{{x.mag_mom_cell}} {{x.moment_unit}}</p>
+
+  {% endfor %}
+
+
+  <p> Exchange Interactions Bond Types</p>
+ 
+  {% for x in mymagbonddata %}
+  
+  <p> Bond Type = {{x.bond_type}} <a href="exchange/{{ x.id }}"> Exchange Details </a> </p>
+  {% endfor %}
+
+
+
+</ul>
+
+
+<p>Back to <a href="/systems">Systems</a></p>  
+
+
+</body>
+</html>

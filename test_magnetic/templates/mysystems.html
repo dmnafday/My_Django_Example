@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+
+th {
+  font-size: 1.5em;
+}
+
+ 
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+th {
+  text-align: center;
+}
+
+td {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+th, td {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+h1 {
+  text-align: center;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>System</h1>
+  
+<table class="center">
+  <tr>
+    <th>Chemical Formula</th>
+    <th>Space Group </th>
+    <th>Space Group No.</th>
+    <th> Structure Data </th>
+    <th> Magnetic Data </th>
+    <th> Publication </th>
+  </tr>
+  {% for x in mysystems %}
+  <tr>
+	  <td>{{ x.chem_formula }} </td> 
+	  <td>{{ x.space_grp }} </td>
+	  <td> {{ x.space_grp_no }}
+	  </td><td><a href="structure/{{ x.id }}"> Structure Details </a></td>
+	  <td><a href="magnetic/{{ x.id }}"> Magnetic Details </a></td>
+	  <td> {{ x.publication }}
+  </tr>
+  {% endfor %}
+</table>
+
+</body>
+</html>

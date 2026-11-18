@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+
+th {
+  font-size: 1.25em;
+}
+
+
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+th {
+  text-align: center;
+}
+
+
+td {
+  text-align: center;
+  font-size: 1.25em;
+}
+
+th, td {
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>{{myexchangedata.magbonddata.system.chem_formula }}</h1>
+
+<ul>
+  
+<h2> Bond Data </h2>
+<table class="left">
+<tr>
+  <th>Bond Type  </th>
+  <th>Bond Shell </th>
+  <th>Bond Pair </th>
+  <th>Bond Distance </th>
+  <th>Bond Vector </th>
+</tr>
+
+<tr>
+  <td>  {{myexchangedata.magbonddata.bond_type}}</td>
+  <td>  {{myexchangedata.magbonddata.bond_shell}}</td>
+  <td>  {{myexchangedata.magbonddata.bond_pair}}</td>
+  <td>  {{myexchangedata.magbonddata.bond_dist}}</td>
+
+  {% for i in myexchangedata.magbonddata.bond_vec.values %}
+
+  <td>{{i}}</td>
+
+  {% endfor %}
+
+</tr>
+</table>
+ 
+  
+<h2> Exchange Interaction Data  </h2>
+<table>
+<tr>
+  <th>  Exchange Tensor {{myexchangedata.exchange_unit}} </th>
+</tr>
+<tr>
+  {% for i in myexchangedata.exchange_tensor.values %}
+  <td>
+  {% for j in i %}
+    {{j}} 
+  <br></br>
+  {% endfor %}
+  </td>
+  {% endfor %}
+</tr>
+</table>
+  
+
+<h2> Exchange Interaction  Components  </h2>
+<table>
+<tr>
+  <th> Isotropic Exchange  ( J_iso ) {{myexchangedata.exchange_unit}} </th>
+  <th> Dzyaloshinskii–Moriya interaction ( DMI ) {{myexchangedata.exchange_unit}} </th>
+  <th> Single Ion Anisotropy ( SIA ) {{myexchangedata.exchange_unit}} </th>
+</tr>
+<tr>
+  {% for i in myexchangedata.Jiso.values %}
+  <td> {{i}}  </td>
+  {% endfor %}
+
+  {% for i in myexchangedata.DMI.values %}
+  <td>  {{i}} </td>
+  {% endfor %}
+
+  <td> 
+  {% for i in myexchangedata.SIA.values %}
+  {% for j in i %}
+    {{j}} <br></br> 
+  {% endfor %}
+  {% endfor %}</td>
+</tr>
+</table>
+
+
+
+</ul>
+
+
+<p style="font-size:25px" >Back to <a href="/systems/magnetic/{{myexchangedata.magbonddata.system.id}}">Magnetic Details</a></p>  
+
+
+</body>
+</html>

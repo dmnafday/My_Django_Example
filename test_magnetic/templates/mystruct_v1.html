@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>{{mysystems.chem_formula }}</h1>
+
+<ul>
+  <p>Space Group : {{ mysystems.space_grp }}</p>
+  {% for x in mystructure %}
+  <p>Number of Atoms : {{x.nelements }}</p>
+  {% for i in x.telements.values %}
+  <p> Atom Types:{{i}}</p>
+  {% endfor %}
+  {% endfor %}
+</ul>
+
+
+<p>Back to <a href="/systems">systems</a></p>  
+
+
+</body>
+</html>

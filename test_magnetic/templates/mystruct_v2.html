@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>{{mysystems.chem_formula }}</h1>
+
+<ul>
+  <p>System Name : {{ mysystems.sys_name}}</p>
+  <p>Space Group : {{ mysystems.space_grp }}</p>
+  <p>Space Group No : {{ mysystems.space_grp_no}}</p>
+  {% for x in mystructure %}
+  <p> Chemical Formula Unit : {{x.chem_form_full}}</p>
+  <p> Basic Formula Unit : {{mysystems.chem_formula}}</p>
+  <p>Number of Atoms : {{x.nelements }}</p>
+  {% for i in x.telements.values %}
+  <p> Atom Types:{{i}}</p>
+  {% endfor %}
+  <p> Dimensionality : {{x.dimension }}</p>
+  {% for i in x.periodicity.values %}
+  <p> Periodicity :<br></br> [X, Y, Z] :: {{i}}</p>
+  {% endfor %}
+  <p> Lattice Parameter : {{x.lat_param }}</p>
+  <p> Units : {{x.length_unit}}</p>
+  <p> Lattice Basis Vectors : </p>
+   {% for i in x.lat_basis_vec.values %}
+  <p> {{i.vec}} = {{i.basis}} <br></br></p>
+  {% endfor %}
+  <p> Atomic Fractional Coordinates : </p>
+  {% for i in x.site_pos.values %}
+  <p> {{i.site}} : {{i.pos}} <br></br></p>
+  {% endfor %}
+
+  {% endfor %}
+</ul>
+
+
+<p>Back to <a href="/systems">systems</a></p>  
+
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+
+th {
+  font-size: 1.25em;
+}
+
+
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+th {
+  text-align: center;
+}
+
+
+td {
+  text-align: center;
+  font-size: 1.25em;
+}
+
+th, td {
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>{{mysystems.chem_formula }}</h1>
+
+<ul>
+<table class="left">
+<tr>
+  <th>System Name  </th>
+  <th>Space Group </th>
+  <th>Space Group No </th>
+</tr>
+
+  <td> {{ mysystems.sys_name}}</td>
+  <td> {{ mysystems.space_grp }}</td>
+  <td>{{ mysystems.space_grp_no}}</td>
+</tr>
+</table>
+
+<h2> Composition Details </h2>
+
+<table class="left">
+<tr>
+  <th> Full Chemical Formula Unit  </th>
+  <th> Basic Chemical Formula Unit  </th>
+  <th> Total Atoms in Cell  </th>
+  <th> Atom Types  </th>
+</tr>
+<tr>
+  {% for x in mystructure %}
+  <td>  {{x.chem_form_full}} </td>
+  <td>  {{mysystems.chem_formula}} </td>
+  <td>  {{x.nelements }} </td>
+  {% for i in x.telements.values %}
+  <td> {{i}}</td>
+  {% endfor %}
+<tr>
+</table>
+
+
+<h2> Lattice Details</h2>
+
+<table class="left">
+<tr>
+  <th> Dimenison Type  </th>
+  <th> Periodicity  </th>
+  <th> Lattice parameter  </th>
+  <th> Lattice Basis Vectors  </th>
+</tr>
+<tr>
+  <td>  {{x.dimension }}</td>
+  {% for i in x.periodicity.values %}
+  <td>  [X, Y, Z] :: {{i}}</td>
+  {% endfor %}
+  <td> a = b = {{x.lat_param }} {{x.length_unit}}</td>
+  <td>  {% for i in x.lat_basis_vec.values %}
+     {{i.vec}} = {{i.basis}}; {% endfor %}</td>
+<tr>
+</table>
+
+<h2> Atomic Coordinates </h2>
+<table class="left">
+<tr>
+  <th> Site  </th>
+  <th> Fractional Coordinate  </th>
+</tr>
+
+  {% for i in x.site_pos.values %}
+<tr>
+  <td> {{i.site}} </td> 
+  <td> {{i.pos}} </td>
+</tr>
+  {% endfor %}
+</table>
+{% endfor %}
+</ul>
+
+
+<p style="font-size:25px">Back to <a href="/systems">Systems</a></p>  
+
+
+</body>
+</html>
